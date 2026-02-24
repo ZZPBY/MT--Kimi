@@ -21,6 +21,8 @@ public class KimiTranslationEngine extends BaseTranslationEngine {
 
     private static final String API_BASE_URL = "https://api.moonshot.cn/v1/chat/completions";
     private static final String DEFAULT_MODEL = "kimi-k2-turbo-preview";
+    private static final String DEFAULT_MAX_TOKENS = "2048";
+    private static final String DEFAULT_TEMPERATURE = "0.3";
     private static final int CONNECT_TIMEOUT = 30000;
     private static final int READ_TIMEOUT = 60000;
     private static final int MAX_RETRY_COUNT = 3;
@@ -52,8 +54,8 @@ public class KimiTranslationEngine extends BaseTranslationEngine {
 
     private String apiKey;
     private String model;
-    private int maxTokens;
-    private double temperature;
+    private String maxTokensStr;
+    private String temperatureStr;
 
     @Override
     protected void init() {
@@ -64,8 +66,24 @@ public class KimiTranslationEngine extends BaseTranslationEngine {
         SharedPreferences preferences = getContext().getPreferences();
         apiKey = preferences.getString("api_key", "");
         model = preferences.getString("model", DEFAULT_MODEL);
-        maxTokens = preferences.getInt("max_tokens", 2048);
-        temperature = preferences.getFloat("temperature", 0.3f);
+        maxTokensStr = preferences.getString("max_tokens", DEFAULT_MAX_TOKENS);
+        temperatureStr = preferences.getString("temperature", DEFAULT_TEMPERATURE);
+    }
+
+    private int getMaxTokens() {
+        try {
+            return Integer.parseInt(maxTokensStr);
+        } catch (NumberFormatException e) {
+            return 2048;
+        }
+    }
+
+    private double getTemperature() {
+        try {
+            return Double.parseDouble(temperatureStr);
+        } catch (NumberFormatException e) {
+            return 0.3;
+        }
     }
 
     @NonNull
@@ -180,8 +198,8 @@ public class KimiTranslationEngine extends BaseTranslationEngine {
 
             JSONObject requestBody = new JSONObject();
             requestBody.put("model", model);
-            requestBody.put("temperature", temperature);
-            requestBody.put("max_completion_tokens", maxTokens);
+            requestBody.put("temperature", getTemperature());
+            requestBody.put("max_completion_tokens", getMaxTokens());
 
             JSONArray messages = new JSONArray();
 
