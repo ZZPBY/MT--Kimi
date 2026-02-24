@@ -19,8 +19,8 @@ public class KimiPluginPreference implements PluginPreference {
     };
 
     private static final String[] MODEL_DISPLAY_NAMES = {
-        "Kimi K2 Turbo (推荐)",
-        "Kimi K2.5",
+        "Kimi K2 Turbo (更快)",
+        "Kimi K2.5（更准）",
         "Kimi K2 0905",
         "Kimi K2 0711",
         "Kimi K2 Thinking Turbo",
