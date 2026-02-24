@@ -1,0 +1,12 @@
+{
+  "pluginSdkVersion": 2,
+  "pluginID": "BY.plugin.kimi.translate",
+  "versionCode": 1,
+  "versionName": "v1.0",
+  "name": "Kimi翻译",
+  "description": "基于Kimi API的翻译引擎，支持多语言互译",
+  "interfaces": [
+    "BY.plugin.KimiTranslationEngine"
+  ],
+  "mainPreference": "BY.plugin.KimiPluginPreference"
+}
