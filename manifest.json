@@ -5,8 +5,6 @@
   "versionName": "v1.2",
   "name": "Kimi翻译",
   "description": "基于Kimi API的翻译引擎，支持多语言互译",
-  "interfaces": [
-    "BY.plugin.KimiTranslationEngine"
-  ],
+  "interfaces": ["BY.plugin.KimiTranslationEngine"],
   "mainPreference": "BY.plugin.KimiPluginPreference"
 }
